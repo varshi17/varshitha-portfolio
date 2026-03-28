@@ -12,7 +12,6 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 
-// Wrapper component to handle routing logic
 const AppContent = () => {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState('home');
@@ -25,11 +24,9 @@ const AppContent = () => {
 
   // Show only the active section based on route
   const showSection = useCallback((sectionId) => {
-    // Hide all sections
     const allSections = document.querySelectorAll('section, .skills-wrap, .certs-wrap, .contact-wrap');
     allSections.forEach(sec => sec.classList.remove('active-section'));
     
-    // Show selected section
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
       targetSection.classList.add('active-section');
@@ -46,7 +43,6 @@ const AppContent = () => {
 
   return (
     <div className="App">
-      {/* Background Orbs */}
       <div className="bg-orb orb1"></div>
       <div className="bg-orb orb2"></div>
       <div className="bg-orb orb3"></div>
