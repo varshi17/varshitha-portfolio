@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const About = () => {
   const [showCVModal, setShowCVModal] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [photoError, setPhotoError] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -75,34 +76,62 @@ const About = () => {
           gap: '70px',
           alignItems: 'center'
         }}>
+          {/* Photo Section */}
           <div className="reveal">
             <div style={{
-              background: 'var(--surface)',
+              background: 'linear-gradient(145deg, #ffffff, #f8f9fa)',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               padding: '20px',
               border: '1px solid var(--border)',
               borderRadius: '32px',
-              background: 'linear-gradient(145deg, #0a0e1c, #050814)',
-              transition: 'transform 0.3s'
+              transition: 'transform 0.3s',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.05)'
             }}>
-              <img 
-                src="photo.png" 
-                alt="Varshitha" 
-                style={{
+              {!photoError ? (
+                <img 
+                  src="/photo.png"
+                  alt="Varshitha Naidu" 
+                  style={{
+                    width: '280px',
+                    height: '280px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: '3px solid var(--accent)',
+                    boxShadow: '0 0 30px rgba(124,58,237,0.2)',
+                    transition: 'transform 0.4s'
+                  }}
+                  onError={() => setPhotoError(true)}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                    e.currentTarget.style.borderColor = 'var(--accent2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.borderColor = 'var(--accent)';
+                  }}
+                />
+              ) : (
+                <div style={{
                   width: '280px',
                   height: '280px',
                   borderRadius: '50%',
-                  objectFit: 'cover',
-                  border: '3px solid var(--accent)',
-                  boxShadow: '0 0 30px rgba(124,58,237,0.4)',
-                  transition: 'transform 0.4s'
-                }}
-                onError={(e) => e.target.src = 'https://placehold.co/280x280/7c3aed/ffffff?text=VN'}
-              />
+                  background: 'linear-gradient(135deg, var(--accent), var(--accent2))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  gap: '12px'
+                }}>
+                  <span style={{ fontSize: '48px' }}>👩‍💻</span>
+                  <span style={{ fontSize: '12px', color: 'white' }}>Varshitha Naidu</span>
+                </div>
+              )}
             </div>
           </div>
+          
+          {/* About Text Section */}
           <div className="about-text reveal">
             <p style={{ color: 'var(--muted)', lineHeight: 1.9, marginBottom: '20px', fontSize: '13px' }}>
               I'm <strong style={{ color: 'var(--text)' }}>Varshitha Naidu</strong>, a passionate developer with a hunger for solving complex problems. My journey blends full-stack development with deep algorithmic thinking — I've built <strong>Real‑time Weather Advisory Systems</strong> and <strong>Word Search engines</strong>.
@@ -149,19 +178,19 @@ const About = () => {
               gap: '20px',
               marginTop: '28px'
             }}>
-              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.03)', borderRadius: '0 8px 8px 0' }}>
+              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.02)', borderRadius: '0 8px 8px 0' }}>
                 <div className="detail-label" style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent)' }}>📍 University</div>
                 <div className="detail-val" style={{ fontSize: '12px', color: 'var(--text)', marginTop: '5px', fontWeight: 500 }}>Lovely Professional University</div>
               </div>
-              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.03)', borderRadius: '0 8px 8px 0' }}>
+              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.02)', borderRadius: '0 8px 8px 0' }}>
                 <div className="detail-label" style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent)' }}>📧 Email</div>
                 <div className="detail-val" style={{ fontSize: '12px', color: 'var(--text)', marginTop: '5px', fontWeight: 500 }}>varshithanaidu.17@gmail.com</div>
               </div>
-              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.03)', borderRadius: '0 8px 8px 0' }}>
+              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.02)', borderRadius: '0 8px 8px 0' }}>
                 <div className="detail-label" style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent)' }}>📞 Mobile</div>
                 <div className="detail-val" style={{ fontSize: '12px', color: 'var(--text)', marginTop: '5px', fontWeight: 500 }}>+91-9704050399</div>
               </div>
-              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.03)', borderRadius: '0 8px 8px 0' }}>
+              <div className="detail-item" style={{ borderLeft: '2px solid var(--accent)', paddingLeft: '16px', background: 'rgba(124,58,237,0.02)', borderRadius: '0 8px 8px 0' }}>
                 <div className="detail-label" style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--accent)' }}>🎯 Status</div>
                 <div className="detail-val" style={{ fontSize: '12px', color: 'var(--text)', marginTop: '5px', fontWeight: 500 }}>Open to Opportunities</div>
               </div>
@@ -408,6 +437,13 @@ const About = () => {
           .about-profile-img {
             width: 220px !important;
             height: 220px !important;
+          }
+        }
+        
+        @media (max-width: 550px) {
+          .about-profile-img {
+            width: 180px !important;
+            height: 180px !important;
           }
         }
       `}</style>
