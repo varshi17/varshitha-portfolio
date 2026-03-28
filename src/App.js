@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './styles/portfolio.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -15,17 +15,16 @@ import CustomCursor from './components/CustomCursor';
 // Wrapper component to handle routing logic
 const AppContent = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('home');
 
   // Get current path without the leading slash
-  const getCurrentSection = () => {
+  const getCurrentSection = useCallback(() => {
     const path = location.pathname.substring(1);
     return path || 'home';
-  };
+  }, [location.pathname]);
 
   // Show only the active section based on route
-  const showSection = (sectionId) => {
+  const showSection = useCallback((sectionId) => {
     // Hide all sections
     const allSections = document.querySelectorAll('section, .skills-wrap, .certs-wrap, .contact-wrap');
     allSections.forEach(sec => sec.classList.remove('active-section'));
@@ -37,13 +36,13 @@ const AppContent = () => {
     }
     
     setActiveSection(sectionId);
-  };
+  }, []);
 
   // Update active section when route changes
   useEffect(() => {
     const currentSection = getCurrentSection();
     showSection(currentSection);
-  }, [location.pathname]);
+  }, [location.pathname, getCurrentSection, showSection]);
 
   return (
     <div className="App">
